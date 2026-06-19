@@ -456,6 +456,68 @@
 
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+
+    /* ===== EMPREINTE OFFICIELLE DIGIY ===== */
+    .officialStrip{
+      margin-top:16px;
+      padding:14px 15px;
+      border-radius:20px;
+      border:1px solid rgba(243,212,107,.34);
+      background:
+        linear-gradient(135deg,rgba(212,175,55,.16),rgba(34,197,94,.10)),
+        rgba(0,0,0,.18);
+      box-shadow:0 12px 26px rgba(0,0,0,.18);
+    }
+
+    .officialStrip strong{
+      display:block;
+      color:var(--gold2);
+      font-size:16px;
+      font-weight:1000;
+      letter-spacing:.01em;
+      line-height:1.25;
+    }
+
+    .officialStrip span{
+      display:block;
+      margin-top:5px;
+      color:#effaf3;
+      font-size:15px;
+      font-weight:850;
+      line-height:1.45;
+    }
+
+    .officialLine{
+      margin-top:10px;
+      padding:11px 12px;
+      border-radius:16px;
+      border:1px solid rgba(34,197,94,.28);
+      background:rgba(34,197,94,.10);
+      color:#bbf7d0;
+      font-size:15px;
+      line-height:1.45;
+      font-weight:950;
+    }
+
+    .qrSeal{
+      display:grid;
+      gap:6px;
+      margin-top:2px;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(243,212,107,.30);
+      background:rgba(212,175,55,.09);
+      color:#fff8cf;
+      font-size:14px;
+      line-height:1.45;
+      font-weight:900;
+    }
+
+    .qrSeal b{
+      color:var(--gold2);
+      font-weight:1000;
+    }
+
     @media(max-width:980px){.hero{grid-template-columns:1fr}}
     @media(max-width:640px){
       .wrap{padding:12px 10px 36px}
@@ -501,6 +563,8 @@
 
           <div class="chips">
             <span class="chip ok">Contact direct</span>
+            <span class="chip ok">QR officiel DIGIY</span>
+            <span class="chip ok">0% commission</span>
             <span class="chip">Maçon</span>
             <span class="chip">Bâtisseur</span>
             <span class="chip">Villa</span>
@@ -508,6 +572,11 @@
             <span class="chip">Rénovation</span>
             <span class="chip">Finitions</span>
             <span class="chip">Petite Côte</span>
+          </div>
+
+          <div class="officialStrip" aria-label="Empreinte officielle DIGIYLYFE">
+            <strong>QR officiel DIGIYLYFE · Fiche pro terrain</strong>
+            <span>Contact direct, demande directe, devis direct : le client parle au professionnel sans intermédiaire. La valeur du business reste dans la main du pro local.</span>
           </div>
 
           <div class="text">Construction de villas, piscines béton, finitions haut de gamme, rénovation et extensions. Le client voit le métier, la zone, le contact direct et peut ouvrir la demande en gardant la fiche sous la main.</div>
@@ -526,12 +595,16 @@
 
       <aside class="panel side">
         <article class="qrCard" id="qr" aria-label="QR de la fiche Mbaye Diouf">
-          <div class="qrKicker">📲 QR fiche</div>
+          <div class="qrKicker">📲 QR officiel DIGIYLYFE</div>
           <a id="qrAnchor" href="#" target="_blank" rel="noopener">
             <img id="qrImg" class="qrImg" alt="QR fiche Mbaye Diouf DIGIY BUILD">
           </a>
-          <div class="qrTitle">Scanne cette fiche</div>
-          <div class="qrText">Ce QR ouvre directement la fiche Mbaye Diouf. Lecture, partage, affichage terrain.</div>
+          <div class="qrTitle">Scanne la fiche officielle</div>
+          <div class="qrText">Ce QR ouvre directement la fiche officielle DIGIY BUILD de Mbaye Diouf. Lecture, partage, contact direct et affichage terrain.</div>
+          <div class="qrSeal">
+            <b>Fiche pro terrain · 0% commission</b>
+            <span>Un QR simple ouvre un lien. Un QR DIGIY ouvre une route : métier clair, zone, contact, demande et devis direct.</span>
+          </div>
           <div class="qrLink" id="qrLinkText">Préparation du lien…</div>
         </article>
 
@@ -570,7 +643,7 @@
     </section>
 
     <div class="foot">
-      DIGIY BUILD • fiche publique • QR visible • métier clair • secteur • contact direct • sans PIN • sans cockpit
+      DIGIY BUILD • fiche publique officielle • QR DIGIY visible • métier clair • secteur • contact direct • demande/devis direct • 0% commission • sans PIN
     </div>
   </div>
 
@@ -616,7 +689,7 @@
       const profileUrl = currentUrl();
 
       function whatsappUrl(){
-        const msg = encodeURIComponent(`Bonjour ${NAME}, je viens de DIGIYLYFE pour votre service ${TRADE}.`);
+        const msg = encodeURIComponent(`Bonjour ${NAME}, je viens de votre fiche officielle DIGIYLYFE pour votre service ${TRADE}.`);
         return `https://wa.me/${PHONE}?text=${msg}`;
       }
 
@@ -672,7 +745,7 @@
           if(navigator.share){
             await navigator.share({
               title:`${NAME} — DIGIY BUILD`,
-              text:`${TRADE} · contact direct`,
+              text:`${TRADE} · fiche officielle DIGIYLYFE · contact direct · 0% commission`,
               url:profileUrl
             });
             return;
@@ -702,3 +775,4 @@
   <script src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4" defer></script>
 </body>
 </html>
+

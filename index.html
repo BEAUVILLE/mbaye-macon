@@ -3,12 +3,12 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"/>
-<title>Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE</title>
+<title>Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE.COM</title>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
-<meta content="Mbaye Diouf, entrepreneur maçon à Saly, Mbour et Thiès. Construction de villas, piscines béton, rénovation, extensions et finitions haut de gamme. Contact direct." name="description"/>
+<meta content="Mbaye Diouf, entrepreneur maçon à Saly, Mbour et Thiès. Construction de villas, piscines béton, rénovation, extensions et finitions haut de gamme. Contact direct via DIGIYLYFE.COM." name="description"/>
 <meta content="#06130f" name="theme-color"/><meta content="mbaye-diouf-fr-en-20260620" name="digiy-build"/>
-<meta content="Mbaye Diouf — Entrepreneur maçon" property="og:title"/>
-<meta content="Construction de villas, piscines béton, rénovation et finitions · Saly / Mbour / Thiès · Contact direct" property="og:description"/>
+<meta content="Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE.COM" property="og:title"/>
+<meta content="Construction de villas, piscines béton, rénovation et finitions · Saly / Mbour / Thiès · Contact direct · DIGIYLYFE.COM" property="og:description"/>
 <meta content="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-03_56_26.png" property="og:image"/>
 <meta content="website" property="og:type"/>
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
@@ -517,6 +517,98 @@
     }
 
 
+    /* ===== MARQUE MÈRE DIGIYLYFE.COM ===== */
+    .brandMother{
+      display:block;
+      border:1px solid rgba(243,212,107,.38);
+      border-radius:22px;
+      background:
+        radial-gradient(600px 180px at 16% 0%, rgba(243,212,107,.17), transparent 60%),
+        linear-gradient(135deg,rgba(34,197,94,.12),rgba(212,175,55,.10),rgba(0,0,0,.18));
+      box-shadow:0 18px 38px rgba(0,0,0,.22);
+      overflow:hidden;
+    }
+    .brandMother a{
+      min-height:78px;
+      padding:14px 18px;
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      gap:12px;
+      align-items:center;
+    }
+    .brandMother span{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:36px;
+      padding:0 12px;
+      border-radius:999px;
+      border:1px solid rgba(243,212,107,.34);
+      background:rgba(243,212,107,.12);
+      color:#fff8cf;
+      font-size:12px;
+      font-weight:1000;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      white-space:nowrap;
+    }
+    .brandMother strong{
+      color:var(--gold2);
+      font-size:clamp(24px,4vw,38px);
+      font-weight:1000;
+      letter-spacing:-.04em;
+      line-height:1;
+    }
+    .brandMother em{
+      color:#effaf3;
+      font-style:normal;
+      font-size:15px;
+      font-weight:900;
+      line-height:1.35;
+      text-align:right;
+    }
+    .digiylyfeBrandPill{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:10px;
+      min-height:40px;
+      padding:0 13px;
+      border-radius:999px;
+      background:linear-gradient(135deg,var(--orange),var(--gold2));
+      color:#13200d;
+      font-size:14px;
+      font-weight:1000;
+      box-shadow:0 10px 22px rgba(249,115,22,.18);
+    }
+    .qrBrandMother{
+      margin-top:10px;
+      padding:10px 11px;
+      border-radius:16px;
+      border:1px solid rgba(243,212,107,.34);
+      background:rgba(0,0,0,.18);
+      color:#fff8cf;
+      font-size:14px;
+      line-height:1.45;
+      font-weight:950;
+    }
+    .qrBrandMother a,
+    .footBrand a{
+      color:var(--gold2);
+      font-weight:1000;
+      text-decoration:none;
+    }
+    .qrBrandMother a:hover,
+    .footBrand a:hover{text-decoration:underline}
+    .footBrand{
+      margin-top:8px;
+      text-align:center;
+      color:#fff8cf;
+      font-size:14px;
+      font-weight:950;
+    }
+
+
     .langSwitch{
       display:flex;
       gap:6px;
@@ -553,6 +645,15 @@
       }
     }
 
+    @media(max-width:720px){
+      .brandMother a{
+        grid-template-columns:1fr;
+        text-align:center;
+        justify-items:center;
+      }
+      .brandMother em{text-align:center}
+    }
+
     @media(max-width:980px){.hero{grid-template-columns:1fr}}
     @media(max-width:640px){
       .wrap{padding:12px 10px 36px}
@@ -579,13 +680,20 @@
 </div>
 <div class="topActions">
 <a class="btn secondary" data-i18n="top_gallery" href="https://build.digiylyfe.com/listing.html">Retour galerie</a>
-<a class="btn secondary" data-i18n="top_site" href="https://digiylyfe.com/">Site</a>
+<a class="btn secondary" data-i18n="top_site" href="https://digiylyfe.com/" target="_blank" rel="noopener">DIGIYLYFE.COM</a>
 <a class="btn secondary" data-i18n="top_hub" href="https://digiy-hub.digiylyfe.com/">HUB</a>
 </div>
 <div aria-label="Changer la langue" class="langSwitch">
 <button class="active" id="langFr" type="button">FR</button>
 <button id="langEn" type="button">EN</button>
 </div></header>
+<section class="brandMother" aria-label="Marque mère DIGIYLYFE.COM">
+  <a href="https://digiylyfe.com/" target="_blank" rel="noopener">
+    <span data-i18n="brand_mother_label">Marque mère officielle</span>
+    <strong>DIGIYLYFE.COM</strong>
+    <em data-i18n="brand_mother_text">La route digitale entre le client et le professionnel local.</em>
+  </a>
+</section>
 <section class="hero">
 <main class="panel">
 <div class="poster">
@@ -609,6 +717,7 @@
 <div aria-label="Empreinte officielle DIGIYLYFE" class="officialStrip">
 <strong data-i18n="official_title">QR officiel DIGIYLYFE · Fiche pro terrain</strong>
 <span data-i18n="official_text">Contact direct, demande directe, devis direct : le client parle au professionnel sans intermédiaire. La valeur du business reste dans la main du pro local.</span>
+<a class="digiylyfeBrandPill" href="https://digiylyfe.com/" target="_blank" rel="noopener">DIGIYLYFE.COM</a>
 </div>
 <div class="text" data-i18n="main_text">Construction de villas, piscines béton, finitions haut de gamme, rénovation et extensions. Le client voit le métier, la zone, le contact direct et peut ouvrir la demande en gardant la fiche sous la main.</div>
 <div class="serviceBox">
@@ -634,6 +743,7 @@
 <b data-i18n="qr_seal_title">Fiche pro terrain · 0% commission</b>
 <span data-i18n="qr_seal_text">Un QR simple ouvre un lien. Un QR DIGIY ouvre une route : métier clair, zone, contact, demande et devis direct.</span>
 </div>
+<div class="qrBrandMother"><span data-i18n="qr_brand_text">Fiche portée par la marque mère</span> · <a href="https://digiylyfe.com/" target="_blank" rel="noopener">DIGIYLYFE.COM</a></div>
 <div class="qrLink" id="qrLinkText">Préparation du lien…</div>
 </article>
 <div class="miniStat">
@@ -666,6 +776,7 @@
 </aside>
 </section>
 <div class="foot" data-i18n="foot">DIGIY BUILD • fiche publique officielle • QR DIGIY visible • métier clair • secteur • contact direct • demande/devis direct • 0% commission • sans PIN</div>
+<div class="footBrand"><a href="https://digiylyfe.com/" target="_blank" rel="noopener">DIGIYLYFE.COM</a> · <span data-i18n="foot_brand_text">maison mère de la route digitale terrain</span></div>
 </div>
 <nav aria-label="Navigation Mbaye Diouf" class="bottomNav">
 <div class="bottomInner">
@@ -803,26 +914,30 @@
 
   const I18N = {
     fr: {
-      pageTitle: "Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE",
-      metaDescription: "Mbaye Diouf, entrepreneur maçon à Saly, Mbour et Thiès. Construction de villas, piscines béton, rénovation, extensions et finitions haut de gamme. Contact direct.",
-      ogTitle: "Mbaye Diouf — Entrepreneur maçon",
-      ogDescription: "Construction de villas, piscines béton, rénovation et finitions · Saly / Mbour / Thiès · Contact direct",
+      pageTitle: "Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE.COM",
+      metaDescription: "Mbaye Diouf, entrepreneur maçon à Saly, Mbour et Thiès. Construction de villas, piscines béton, rénovation, extensions et finitions haut de gamme. Contact direct via DIGIYLYFE.COM.",
+      ogTitle: "Mbaye Diouf — Entrepreneur maçon | DIGIYLYFE.COM",
+      ogDescription: "Construction de villas, piscines béton, rénovation et finitions · Saly / Mbour / Thiès · Contact direct · DIGIYLYFE.COM",
       posterAlt: "Mbaye Diouf — entrepreneur maçon, villas et piscines à Saly",
       qrAlt: "QR fiche Mbaye Diouf DIGIY BUILD",
       qrPreparing: "Préparation du lien…",
       copied: "Lien copié",
       copyPrompt: "Copie le lien :",
       shareTitle: "Mbaye — DIGIY BUILD",
-      shareText: "Entrepreneur maçon · fiche officielle DIGIYLYFE · contact direct · 0% commission",
-      whatsappText: "Bonjour Mbaye, je viens de votre fiche officielle DIGIYLYFE pour votre service Entrepreneur maçon.",
+      shareText: "Entrepreneur maçon · fiche officielle DIGIYLYFE.COM · contact direct · 0% commission",
+      whatsappText: "Bonjour Mbaye, je viens de votre fiche officielle DIGIYLYFE.COM pour votre service Entrepreneur maçon.",
       schemaDescription: "Mbaye Diouf, entrepreneur maçon à Saly, Mbour et Thiès. Construction de villas, piscines béton, rénovation, extensions et finitions haut de gamme. Contact direct.",
       schemaPrice: "Sur devis",
 
       kicker: "Je propose mes services",
       sub: "Entrepreneur maçon · Saly · Mbour · Thiès",
       top_gallery: "Retour galerie",
-      top_site: "Site",
+      top_site: "DIGIYLYFE.COM",
       top_hub: "HUB",
+      brand_mother_label: "Marque mère officielle",
+      brand_mother_text: "La route digitale entre le client et le professionnel local.",
+      qr_brand_text: "Fiche portée par la marque mère",
+      foot_brand_text: "maison mère de la route digitale terrain",
       lead: "Bâtisseur · villas modernes · piscines béton · rénovation · finitions haut de gamme",
       chip_contact: "Contact direct",
       chip_qr: "QR officiel DIGIY",
@@ -834,8 +949,8 @@
       chip_renov: "Rénovation",
       chip_finish: "Finitions",
       chip_coast: "Petite Côte",
-      official_title: "QR officiel DIGIYLYFE · Fiche pro terrain",
-      official_text: "Contact direct, demande directe, devis direct : le client parle au professionnel sans intermédiaire. La valeur du business reste dans la main du pro local.",
+      official_title: "QR officiel DIGIYLYFE.COM · Fiche pro terrain",
+      official_text: "Contact direct, demande directe, devis direct : le client parle au professionnel sans intermédiaire. DIGIYLYFE.COM porte la route digitale ; la valeur du business reste dans la main du pro local.",
       main_text: "Construction de villas, piscines béton, finitions haut de gamme, rénovation et extensions. Le client voit le métier, la zone, le contact direct et peut ouvrir la demande en gardant la fiche sous la main.",
       services_title: "Services utiles",
       service_1: "Construction de villas et petits chantiers de bâtiment.",
@@ -869,29 +984,33 @@
       bottom_whatsapp: "WhatsApp",
       bottom_share: "Partager",
       toast_copied: "Lien copié",
-      foot: "DIGIY BUILD • fiche publique officielle • QR DIGIY visible • métier clair • secteur • contact direct • demande/devis direct • 0% commission • sans PIN"
+      foot: "DIGIY BUILD • fiche publique officielle • QR DIGIY visible • métier clair • secteur • contact direct • demande/devis direct • 0% commission • sans PIN • DIGIYLYFE.COM"
     },
     en: {
-      pageTitle: "Mbaye Diouf — Masonry contractor | DIGIYLYFE",
-      metaDescription: "Mbaye Diouf, masonry contractor in Saly, Mbour and Thiès. Villa construction, concrete pools, renovation, extensions and premium finishes. Direct contact.",
-      ogTitle: "Mbaye Diouf — Masonry contractor",
-      ogDescription: "Villa construction, concrete pools, renovation and finishes · Saly / Mbour / Thiès · Direct contact",
+      pageTitle: "Mbaye Diouf — Masonry contractor | DIGIYLYFE.COM",
+      metaDescription: "Mbaye Diouf, masonry contractor in Saly, Mbour and Thiès. Villa construction, concrete pools, renovation, extensions and premium finishes. Direct contact via DIGIYLYFE.COM.",
+      ogTitle: "Mbaye Diouf — Masonry contractor | DIGIYLYFE.COM",
+      ogDescription: "Villa construction, concrete pools, renovation and finishes · Saly / Mbour / Thiès · Direct contact · DIGIYLYFE.COM",
       posterAlt: "Mbaye Diouf — masonry contractor for villas and pools in Saly",
       qrAlt: "Mbaye Diouf DIGIY BUILD profile QR code",
       qrPreparing: "Preparing the link…",
       copied: "Link copied",
       copyPrompt: "Copy the link:",
       shareTitle: "Mbaye — DIGIY BUILD",
-      shareText: "Masonry contractor · official DIGIYLYFE profile · direct contact · 0% commission",
-      whatsappText: "Hello Mbaye, I am coming from your official DIGIYLYFE profile for your masonry contractor service.",
+      shareText: "Masonry contractor · official DIGIYLYFE.COM profile · direct contact · 0% commission",
+      whatsappText: "Hello Mbaye, I am coming from your official DIGIYLYFE.COM profile for your masonry contractor service.",
       schemaDescription: "Mbaye Diouf, masonry contractor in Saly, Mbour and Thiès. Villa construction, concrete pools, renovation, extensions and premium finishes. Direct contact.",
       schemaPrice: "Quote-based",
 
       kicker: "I offer my services",
       sub: "Masonry contractor · Saly · Mbour · Thiès",
       top_gallery: "Back to gallery",
-      top_site: "Site",
+      top_site: "DIGIYLYFE.COM",
       top_hub: "HUB",
+      brand_mother_label: "Official mother brand",
+      brand_mother_text: "The digital route between the client and the local professional.",
+      qr_brand_text: "Profile carried by the mother brand",
+      foot_brand_text: "mother brand of the field digital route",
       lead: "Builder · modern villas · concrete pools · renovation · premium finishes",
       chip_contact: "Direct contact",
       chip_qr: "Official DIGIY QR",
@@ -903,8 +1022,8 @@
       chip_renov: "Renovation",
       chip_finish: "Finishes",
       chip_coast: "Petite Côte",
-      official_title: "Official DIGIYLYFE QR · Field pro profile",
-      official_text: "Direct contact, direct request, direct quote: the client speaks to the professional without an intermediary. The business value stays in the hands of the local pro.",
+      official_title: "Official DIGIYLYFE.COM QR · Field pro profile",
+      official_text: "Direct contact, direct request, direct quote: the client speaks to the professional without an intermediary. DIGIYLYFE.COM carries the digital route; the business value stays in the hands of the local pro.",
       main_text: "Villa construction, concrete pools, premium finishes, renovation and extensions. The client sees the trade, the area and the direct contact, then can open the request while keeping the profile close at hand.",
       services_title: "Useful services",
       service_1: "Villa construction and small building projects.",
@@ -938,7 +1057,7 @@
       bottom_whatsapp: "WhatsApp",
       bottom_share: "Share",
       toast_copied: "Link copied",
-      foot: "DIGIY BUILD • official public profile • visible DIGIY QR • clear trade • area • direct contact • direct request/quote • 0% commission • no PIN"
+      foot: "DIGIY BUILD • official public profile • visible DIGIY QR • clear trade • area • direct contact • direct request/quote • 0% commission • no PIN • DIGIYLYFE.COM"
     }
   };
 
@@ -1085,4 +1204,5 @@
 <script defer="" src="https://pro-action-digiy.digiylyfe.com/assets/js/digiy-retour-voix.js?v=retour-voix-20260606-v4"></script>
 </body>
 </html>
+
 

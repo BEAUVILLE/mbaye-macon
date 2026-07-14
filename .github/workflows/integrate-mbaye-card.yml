@@ -1,0 +1,162 @@
+name: Intégrer la carte Mbaye
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/integrate-mbaye-card.yml
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Intégrer une seule carte officielle
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("index.html")
+          text = path.read_text(encoding="utf-8")
+
+          text = text.replace(
+              '<meta content="#06130f" name="theme-color"/><meta content="mbaye-diouf-fr-en-20260620" name="digiy-build"/>',
+              '<meta content="#06130f" name="theme-color"/><meta content="mbaye-carte-officielle-20260714" name="digiy-build"/>',
+              1,
+          )
+
+          text = text.replace(
+              '<meta content="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-03_56_26.png" property="og:image"/>',
+              '<meta content="https://mbaye-macon.digiylyfe.com/carte-visite.png?v=20260714" property="og:image"/>',
+              1,
+          )
+
+          old_css = '''    .poster img{
+            width:100%;
+            max-height:760px;
+            object-fit:contain;
+            display:block;
+            padding:10px;
+          }
+          '''
+          new_css = old_css + '''
+              .businessCardLink{
+                width:100%;
+                display:block;
+                cursor:pointer;
+                border-radius:20px;
+                outline:none;
+                transition:transform .18s ease, filter .18s ease;
+              }
+
+              .businessCardLink:hover{
+                transform:translateY(-2px);
+                filter:brightness(1.04);
+              }
+
+              .businessCardLink:focus-visible{
+                box-shadow:0 0 0 4px rgba(243,212,107,.34);
+              }
+
+              .businessCardHint{
+                padding:0 18px 16px;
+                color:#fff3b2;
+                font-size:14px;
+                line-height:1.45;
+                font-weight:950;
+                text-align:center;
+              }
+          '''
+          if old_css not in text:
+              raise SystemExit("Bloc CSS poster introuvable")
+          text = text.replace(old_css, new_css, 1)
+
+          old_poster = '''<div class="poster">
+          <img alt="Mbaye Diouf — entrepreneur maçon, villas et piscines à Saly" id="posterImg" loading="eager" src="https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-03_56_26.png"/>
+          </div>'''
+          new_poster = '''<div class="poster">
+          <a class="businessCardLink" href="https://mbaye-macon.digiylyfe.com/" id="businessCardLink" target="_blank" rel="noopener" aria-label="Ouvrir la fiche officielle de Mbaye Diouf">
+          <img alt="Carte de visite officielle de Mbaye Diouf — entrepreneur maçon" id="posterImg" loading="eager" src="./carte-visite.png?v=20260714"/>
+          </a>
+          </div>
+          <div class="businessCardHint" data-i18n="card_hint">Cliquez sur la carte pour ouvrir la fiche officielle de Mbaye Diouf.</div>'''
+          if old_poster not in text:
+              raise SystemExit("Bloc image principal introuvable")
+          text = text.replace(old_poster, new_poster, 1)
+
+          text = text.replace(
+              '"image": "https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-03_56_26.png",',
+              '"image": "https://mbaye-macon.digiylyfe.com/carte-visite.png?v=20260714",',
+              1,
+          )
+
+          fr_old = 'posterAlt: "Mbaye Diouf — entrepreneur maçon, villas et piscines à Saly",'
+          fr_new = 'posterAlt: "Carte de visite officielle de Mbaye Diouf — entrepreneur maçon",\n      card_hint: "Cliquez sur la carte pour ouvrir la fiche officielle de Mbaye Diouf.",'
+          if fr_old not in text:
+              raise SystemExit("Texte FR poster introuvable")
+          text = text.replace(fr_old, fr_new, 1)
+
+          en_old = 'posterAlt: "Mbaye Diouf — masonry contractor for villas and pools in Saly",'
+          en_new = 'posterAlt: "Official business card of Mbaye Diouf — masonry contractor",\n      card_hint: "Click the card to open Mbaye Diouf’s official profile.",'
+          if en_old not in text:
+              raise SystemExit("Texte EN poster introuvable")
+          text = text.replace(en_old, en_new, 1)
+
+          profile_block = '''  const profileUrl = currentUrl();
+
+          function meta(name, content){'''
+          profile_replacement = '''  const profileUrl = currentUrl();
+          const OFFICIAL_PROFILE_URL = "https://mbaye-macon.digiylyfe.com/";
+
+          function meta(name, content){'''
+          if profile_block not in text:
+              raise SystemExit("Bloc URL officielle introuvable")
+          text = text.replace(profile_block, profile_replacement, 1)
+
+          lang_block = '''    const poster = document.getElementById("posterImg");
+              if(poster) poster.setAttribute("alt", pack.posterAlt);
+
+              const qr = document.getElementById("qrImg");'''
+          lang_replacement = '''    const poster = document.getElementById("posterImg");
+              if(poster) poster.setAttribute("alt", pack.posterAlt);
+
+              const businessCardLink = document.getElementById("businessCardLink");
+              if(businessCardLink){
+                businessCardLink.href = OFFICIAL_PROFILE_URL;
+                businessCardLink.title = pack.card_hint;
+                businessCardLink.setAttribute("aria-label", pack.card_hint);
+              }
+
+              const qr = document.getElementById("qrImg");'''
+          if lang_block not in text:
+              raise SystemExit("Bloc langue carte introuvable")
+          text = text.replace(lang_block, lang_replacement, 1)
+
+          if text.count('class="businessCardLink"') != 1:
+              raise SystemExit("La carte doit apparaître exactement une fois")
+          if text.count('src="./carte-visite.png?v=20260714"') != 1:
+              raise SystemExit("La source carte doit apparaître exactement une fois")
+
+          path.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Valider et publier
+        shell: bash
+        run: |
+          grep -q 'mbaye-carte-officielle-20260714' index.html
+          grep -q 'href="https://mbaye-macon.digiylyfe.com/" id="businessCardLink"' index.html
+          test "$(grep -o 'class="businessCardLink"' index.html | wc -l)" -eq 1
+          test "$(grep -o 'src="./carte-visite.png?v=20260714"' index.html | wc -l)" -eq 1
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/integrate-mbaye-card.yml
+          git add index.html
+          git commit -m "Afficher la carte officielle cliquable de Mbaye"
+          git push

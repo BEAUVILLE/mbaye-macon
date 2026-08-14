@@ -1,0 +1,121 @@
+name: Temporary Mbaye adherent fix
+
+on:
+  push:
+    branches: [tmp-adherent-fix-20260814]
+    paths:
+      - '.github/workflows/tmp-adherent-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: tmp-adherent-fix-20260814
+          fetch-depth: 0
+      - name: Install Pillow
+        run: python3 -m pip install --quiet pillow
+      - name: Correct card and wording
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageDraw, ImageFont
+
+          # Card: add a clear membership badge without touching the QR area.
+          p=Path('carte-visite.png')
+          im=Image.open(p).convert('RGB')
+          w,h=im.size
+          d=ImageDraw.Draw(im)
+          font_path='/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+          x1,x2=int(w*.10),int(w*.90)
+          y1,y2=int(h*.045),int(h*.105)
+          d.rounded_rectangle((x1,y1,x2,y2),radius=max(12,int(h*.018)),fill=(7,55,39),outline=(226,174,43),width=max(2,w//420))
+          text='ADHÉRENT DIGIYLYFE'
+          size=max(20,int(h*.028))
+          while size>14:
+              f=ImageFont.truetype(font_path,size)
+              b=d.textbbox((0,0),text,font=f)
+              if b[2]-b[0] <= (x2-x1)-50: break
+              size-=1
+          tw,th=b[2]-b[0],b[3]-b[1]
+          d.text(((w-tw)/2,y1+(y2-y1-th)/2-2),text,font=f,fill=(244,199,77))
+          im.save(p,'PNG',optimize=True)
+
+          q=Path('index.html')
+          s=q.read_text(encoding='utf-8')
+          reps={
+            './carte-visite.png?v=20260714':'./carte-visite.png?v=20260814-adherent',
+            "motherLabel:'Marque mère officielle'":"motherLabel:'ADHÉRENT DIGIYLYFE'",
+            "chips:['Contact direct','QR officiel DIGIY','0% commission'":"chips:['Contact direct','QR DIGIY','0% commission'",
+            "official:'<strong>QR officiel DIGIYLYFE · Fiche pro terrain</strong>":"official:'<strong>ADHÉRENT DIGIYLYFE · Fiche pro terrain</strong>",
+            "qrKicker:'📲 QR officiel DIGIYLYFE'":"qrKicker:'📲 QR DIGIYLYFE'",
+            "qrTitle:'Scanne la fiche officielle'":"qrTitle:'Scanne la fiche DIGIYLYFE'",
+            "shareText:'Entrepreneur maçon · fiche officielle DIGIYLYFE":"shareText:'Entrepreneur maçon · fiche DIGIYLYFE",
+            "wa:'Bonjour Mbaye, je viens de votre fiche officielle DIGIYLYFE":"wa:'Bonjour Mbaye, je viens de votre fiche DIGIYLYFE",
+            "foot:'DIGIY BUILD • fiche officielle":"foot:'DIGIY BUILD • fiche DIGIYLYFE",
+            "motherLabel:'Official mother brand'":"motherLabel:'DIGIYLYFE MEMBER'",
+            "chips:['Direct contact','Official DIGIY QR','0% commission'":"chips:['Direct contact','DIGIY QR','0% commission'",
+            "official:'<strong>Official DIGIYLYFE QR · Field pro profile</strong>":"official:'<strong>DIGIYLYFE MEMBER · Field pro profile</strong>",
+            "qrKicker:'📲 Official DIGIYLYFE QR'":"qrKicker:'📲 DIGIYLYFE QR'",
+            "qrTitle:'Scan the official profile'":"qrTitle:'Scan the DIGIYLYFE profile'",
+            "official DIGIYLYFE profile":"DIGIYLYFE profile",
+            "official profile":"DIGIYLYFE profile",
+            "motherLabel:'Marca matriz oficial'":"motherLabel:'MIEMBRO DIGIYLYFE'",
+            "QR oficial DIGIY":"QR DIGIY",
+            "QR oficial DIGIYLYFE":"QR DIGIYLYFE",
+            "ficha oficial DIGIYLYFE":"ficha DIGIYLYFE",
+            "ficha oficial":"ficha DIGIYLYFE",
+            "motherLabel:'Offizielle Dachmarke'":"motherLabel:'DIGIYLYFE-MITGLIED'",
+            "Offizieller DIGIY-QR":"DIGIY-QR",
+            "Offizieller DIGIYLYFE-QR":"DIGIYLYFE-QR",
+            "Offizielles Profil":"DIGIYLYFE-Profil",
+            "offizielles DIGIYLYFE-Profil":"DIGIYLYFE-Profil",
+            "offizielles Profil":"DIGIYLYFE-Profil",
+            "motherLabel:'Marchio madre ufficiale'":"motherLabel:'ADERENTE DIGIYLYFE'",
+            "QR ufficiale DIGIY":"QR DIGIY",
+            "QR ufficiale DIGIYLYFE":"QR DIGIYLYFE",
+            "scheda ufficiale DIGIYLYFE":"scheda DIGIYLYFE",
+            "scheda ufficiale":"scheda DIGIYLYFE",
+            "motherLabel:'Officieel moedermerk'":"motherLabel:'DIGIYLYFE-LID'",
+            "Officiële DIGIY-QR":"DIGIY-QR",
+            "Officiële DIGIYLYFE-QR":"DIGIYLYFE-QR",
+            "officieel DIGIYLYFE-profiel":"DIGIYLYFE-profiel",
+            "officiële DIGIYLYFE-profiel":"DIGIYLYFE-profiel",
+            "officieel profiel":"DIGIYLYFE-profiel",
+            "officiële profiel":"DIGIYLYFE-profiel",
+            "motherLabel:'العلامة الأم الرسمية'":"motherLabel:'عضو DIGIYLYFE'",
+            "رمز DIGIY رسمي":"رمز DIGIY",
+            "رمز QR رسمي من DIGIYLYFE":"رمز QR من DIGIYLYFE",
+            "ملف DIGIYLYFE رسمي":"ملف DIGIYLYFE",
+            "الملف الرسمي":"ملف DIGIYLYFE",
+            "ملفك الرسمي على DIGIYLYFE":"ملفك على DIGIYLYFE"
+          }
+          for a,b in reps.items():
+              s=s.replace(a,b)
+          # The membership block itself in translated variants.
+          s=s.replace("official:'<strong>QR DIGIYLYFE · Fiche pro terrain</strong>","official:'<strong>ADHÉRENT DIGIYLYFE · Fiche pro terrain</strong>")
+          s=s.replace("official:'<strong>DIGIYLYFE QR · Field pro profile</strong>","official:'<strong>DIGIYLYFE MEMBER · Field pro profile</strong>")
+          s=s.replace("official:'<strong>QR DIGIYLYFE · Ficha profesional</strong>","official:'<strong>MIEMBRO DIGIYLYFE · Ficha profesional</strong>")
+          s=s.replace("official:'<strong>DIGIYLYFE-QR · Fachprofil</strong>","official:'<strong>DIGIYLYFE-MITGLIED · Fachprofil</strong>")
+          s=s.replace("official:'<strong>QR DIGIYLYFE · Scheda professionale</strong>","official:'<strong>ADERENTE DIGIYLYFE · Scheda professionale</strong>")
+          s=s.replace("official:'<strong>DIGIYLYFE-QR · Vakprofiel</strong>","official:'<strong>DIGIYLYFE-LID · Vakprofiel</strong>")
+          s=s.replace("official:'<strong>رمز QR من DIGIYLYFE · ملف مهني</strong>","official:'<strong>عضو DIGIYLYFE · ملف مهني</strong>")
+          q.write_text(s,encoding='utf-8')
+          PY
+      - name: Validate
+        run: |
+          grep -q 'ADHÉRENT DIGIYLYFE' index.html
+          grep -q '20260814-adherent' index.html
+          ! grep -qi 'fiche officielle' index.html
+          ! grep -qi 'official DIGIYLYFE' index.html
+      - name: Commit temp result
+        run: |
+          git config user.name 'DIGIYLYFE Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add index.html carte-visite.png
+          git commit -m 'Mbaye : adhérent DIGIYLYFE et wording neutre'
+          git push origin HEAD:tmp-adherent-fix-20260814

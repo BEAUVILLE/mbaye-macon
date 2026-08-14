@@ -1,0 +1,45 @@
+name: Temporary audit remaining cards
+
+on:
+  push:
+    branches: [tmp-audit-cards-20260814]
+    paths:
+      - '.github/workflows/tmp-audit-cards.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: tmp-audit-cards-20260814
+          fetch-depth: 0
+      - name: Prepare images
+        run: |
+          cp carte-visite.png /tmp/mbaye.png
+          curl -L --fail -o /tmp/kourant.png https://raw.githubusercontent.com/BEAUVILLE/kourant/main/carte-visite.png
+          curl -L --fail -o /tmp/helage.png https://digiylyfe.net/wp-content/uploads/2026/05/ChatGPT-Image-14-mai-2026-04_01_44.png
+      - name: Read visible wording
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq tesseract-ocr >/dev/null
+          {
+            echo '=== MBAYE ==='
+            tesseract /tmp/mbaye.png stdout -l eng --psm 6 2>/dev/null || true
+            echo
+            echo '=== KOURANT ==='
+            tesseract /tmp/kourant.png stdout -l eng --psm 6 2>/dev/null || true
+            echo
+            echo '=== HELAGE ==='
+            tesseract /tmp/helage.png stdout -l eng --psm 6 2>/dev/null || true
+          } > audit-card-text.txt
+      - name: Commit audit
+        run: |
+          git config user.name 'DIGIYLYFE Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add audit-card-text.txt
+          git commit -m 'Audit temporaire cartes restantes'
+          git push origin HEAD:tmp-audit-cards-20260814

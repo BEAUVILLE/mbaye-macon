@@ -1,0 +1,21 @@
+{
+  "name": "Mbaye Diouf · Maçon",
+  "short_name": "Mbaye Maçon",
+  "description": "Mbaye Diouf · Maçon · présence professionnelle propulsée par DIGIYLYFE",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#07150f",
+  "theme_color": "#126b43",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/assets/mbaye/logo-digiylyfe.jpeg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

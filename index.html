@@ -36,6 +36,7 @@
 <meta name="apple-mobile-web-app-title" content="Mbaye Maçon">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<style id="digiy-owner-access-mode">@media (display-mode: standalone){#ownerAccessBtn{display:none!important}}</style>
 </head>
 <body>
 <a id="returnHome" data-digiy-return-home="1" href="https://digiylyfe.com/" aria-label="Retour à DIGIYLYFE" style="position:relative;z-index:9999;display:flex;align-items:center;justify-content:center;gap:10px;width:min(460px,calc(100% - 28px));min-height:58px;box-sizing:border-box;margin:14px auto;padding:12px 18px;border:2px solid #111;border-radius:14px;background:#fff;color:#111;text-decoration:none;font:950 17px/1.1 system-ui,-apple-system,'Segoe UI',sans-serif;box-shadow:0 5px 16px rgba(0,0,0,.14);-webkit-tap-highlight-color:transparent"><span aria-hidden="true" style="font-size:26px;line-height:1">←</span><strong id="returnText">RETOUR DIGIYLYFE</strong></a>
@@ -285,7 +286,7 @@ function apply(l){
   document.getElementById('copyBtn').textContent=t.copy;
   document.getElementById('shareBtn').textContent=t.share;
   document.getElementById('ownerAccessBtn').textContent=OWNER_LABEL[lang]||OWNER_LABEL.fr;
-  document.getElementById('ownerAccessBtn').href=ownerUrl();
+  document.getElementById('ownerAccessBtn').href=ownerUrl();document.getElementById('ownerAccessBtn').hidden=((window.matchMedia&&window.matchMedia('(display-mode: standalone)').matches)||window.navigator.standalone===true);
   document.getElementById('galleryText').textContent=t.gallery;
   document.getElementById('galleryLink').href='https://build.digiylyfe.com/listing.html?lang='+lang;
   document.getElementById('shareBottom').textContent=t.share.replace(/^📤\s*/,'');

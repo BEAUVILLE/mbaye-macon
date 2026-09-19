@@ -90,6 +90,7 @@
     <a class="btn secondary" id="requestBtn"></a>
     <button class="btn secondary" id="copyBtn"></button>
     <button class="btn green" id="shareBtn"></button>
+    <a class="btn secondary" id="ownerAccessBtn" href="#"></a>
   </div>
 </aside>
 </section>
@@ -220,6 +221,8 @@ waBtn:'💬 واتساب مباشر',call:'📞 اتصال',request:'📄 وصف
 }
 };
 
+const OWNER_LABEL={fr:'🔐 Accès propriétaire',en:'🔐 Owner access',es:'🔐 Acceso propietario',pt:'🔐 Acesso proprietário',it:'🔐 Accesso proprietario',de:'🔐 Inhaberzugang',nl:'🔐 Eigenaartoegang',ar:'🔐 دخول المالك'};
+function ownerUrl(){const u=new URL('https://build.digiylyfe.com/acces-proprietaire-v2.html');u.searchParams.set('site','partenaires-mbaye');u.searchParams.set('lang',lang);u.searchParams.set('return',profile());return u.toString()}
 function pick(){
   let q=new URLSearchParams(location.search).get('lang');
   try{if(!P[q])q=localStorage.getItem('digiy-lang')}catch(e){}
@@ -281,6 +284,8 @@ function apply(l){
   document.getElementById('requestBtn').href=request();
   document.getElementById('copyBtn').textContent=t.copy;
   document.getElementById('shareBtn').textContent=t.share;
+  document.getElementById('ownerAccessBtn').textContent=OWNER_LABEL[lang]||OWNER_LABEL.fr;
+  document.getElementById('ownerAccessBtn').href=ownerUrl();
   document.getElementById('galleryText').textContent=t.gallery;
   document.getElementById('galleryLink').href='https://build.digiylyfe.com/listing.html?lang='+lang;
   document.getElementById('shareBottom').textContent=t.share.replace(/^📤\s*/,'');
